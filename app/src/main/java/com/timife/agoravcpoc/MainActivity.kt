@@ -23,6 +23,8 @@ class MainActivity : ComponentActivity() {
     private var mRtcEngine: RtcEngine? = null
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -30,10 +32,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             val viewModel: AgoraVCViewModel = hiltViewModel()
             AgoraVCPOCTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    if (checkPermissions(this)) {
-                        VideoCallingScreen()
-                    }
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding -> JoinCallScreen()
+                  /*  if (checkPermissions(this)) {
+                        JoinCallScreen()
+                        *//*VideoCallingScreen()*//*
+                    }*/
                 }
             }
         }
@@ -53,6 +56,12 @@ val options = ChannelMediaOptions().apply {
 
 // Use the temporary token to join the channel
 // Specify the user ID yourself and ensure it is unique within the channel
+
+
+
+
+
+
 
 
 @Composable

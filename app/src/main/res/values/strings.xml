@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AgoraVCPOC</string>
+    <string name="title_activity_video_call">VideoCallActivity</string>
 </resources>
