@@ -68,6 +68,7 @@ private fun InputFields( modifier: Modifier = Modifier,){
     val context = LocalContext.current
 
     val channelNameState = remember { mutableStateOf(TextFieldValue()) }
+    val userId = remember { mutableStateOf(TextFieldValue()) }
     val userRoleOptions = listOf("Broadcaster", "Audience")
     val (selectedOption, onOptionSelected) = remember { mutableStateOf(userRoleOptions[0]) }
 
@@ -82,6 +83,19 @@ private fun InputFields( modifier: Modifier = Modifier,){
             value = channelNameState.value,
             onValueChange = { channelNameState.value = it },
             label = { Text("Channel Name ") },
+            placeholder = { Text("test") },
+            modifier = Modifier
+                .align(
+                    alignment = Alignment.CenterHorizontally
+                )
+                .fillMaxWidth()
+        )
+        Spacer(modifier = modifier.height(16.dp))
+
+        TextField(
+            value = userId.value,
+            onValueChange = { userId.value = it },
+            label = { Text("UserId") },
             placeholder = { Text("test") },
             modifier = Modifier
                 .align(
@@ -125,10 +139,14 @@ private fun InputFields( modifier: Modifier = Modifier,){
 
         Button(
             onClick = {
-                 val intent = Intent(context, VideoCallActivity::class.java)
-                 intent.putExtra("ChannelName", channelNameState.value.text)
-                 intent.putExtra("UserRole", selectedOption)
-                 ContextCompat.startActivity(context, intent, Bundle())
+                if ( channelNameState.value.text.isNotEmpty() && userId.value.text.isNotEmpty()){
+                    val intent = Intent(context, VideoCallActivity::class.java)
+                    intent.putExtra("ChannelName", channelNameState.value.text)
+                    intent.putExtra("UserRole", selectedOption)
+                    intent.putExtra("UserId", userId.value.text)
+                    ContextCompat.startActivity(context, intent, Bundle())
+                }
+
             },
             contentPadding = PaddingValues(
                 horizontal = 20.dp,
